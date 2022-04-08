@@ -36,7 +36,7 @@ namespace Week11_3_ConcurrencyDesignPatterns
 			// then use the select method to invoke the constructor on each handler
 			// return the invoked handlers to the add range method
 			// and add all the handler to the list
-			this.handlers.AddRange(typeof(Reactor).Assembly.DefinedTypes.Where(c => c == typeof(Handler)
+			this.handlers.AddRange(typeof(Reactor).Assembly.DefinedTypes.Where(c => typeof(Handler).IsAssignableFrom(c)
 																			&& !c.IsAbstract
 																			&& c.IsClass)
 			                                      .Select(t => (Handler)Activator.CreateInstance(t)));
